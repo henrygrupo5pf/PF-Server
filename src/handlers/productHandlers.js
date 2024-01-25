@@ -1,11 +1,7 @@
-const { 
-    getProducts, 
-    searchProduct, 
-    getProductDetail, 
-    createProduct, 
-    updateProduct,
-    filterProducts 
-} = require('../controllers/productControllers');
+const getProductDetail= require("../controllers/productControllers/getProductDetail");
+
+
+
 
 const getProductsHandler = async (req, res) => {
     try {
