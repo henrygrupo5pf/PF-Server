@@ -4,7 +4,8 @@ const {
     searchProductHandler, 
     getProductDetailHandler, 
     postProductHandler, 
-    updateProductHandler 
+    updateProductHandler,
+    getFilteredProducts
 } = require('../handlers/productHandlers');
 
 const productRouter = Router();
@@ -14,6 +15,8 @@ productRouter.get('/', getProductsHandler);
 productRouter.get('/name', searchProductHandler);
 
 productRouter.get('/:id', getProductDetailHandler);
+
+productRouter.get('/filter', getFilteredProducts);
 
 productRouter.post('/', postProductHandler);
 

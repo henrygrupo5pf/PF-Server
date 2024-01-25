@@ -3,7 +3,8 @@ const {
     searchProduct, 
     getProductDetail, 
     createProduct, 
-    updateProduct 
+    updateProduct,
+    filterProducts 
 } = require('../controllers/productControllers');
 
 const getProductsHandler = async (req, res) => {
@@ -48,6 +49,16 @@ const getProductDetailHandler = async (req, res) => {
     }
 };
 
+const getFilteredProducts = async (req, res) => {
+    let { category } = req.query;
+    try {
+        const response = await filterProducts(category);
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({error: error.nessage});
+    }
+};
+
 const postProductHandler = async (req, res) => {
     let { userId, name, type, category, cost, description, photo } = req.body;
     let activeStatus = true;
@@ -89,4 +100,5 @@ module.exports = {
     getProductDetailHandler,
     postProductHandler,
     updateProductHandler,
+    getFilteredProducts,
 };
