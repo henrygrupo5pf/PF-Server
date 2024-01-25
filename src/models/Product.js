@@ -20,6 +20,10 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('Books', 'Electronic Devices', 'Lab Equipment', 'Stationery'),
       allowNull: false,
     },
+    category: {
+      type: DataTypes.ENUM('Books', 'Electronic Devices', 'Lab Equipment', 'Repairs', 'Plumbing', 'Electricity'),
+      allowNull: false,
+    },
     cost: {
       type: DataTypes.DECIMAL,
       allowNull: false,
