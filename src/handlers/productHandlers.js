@@ -1,6 +1,5 @@
 const getProductDetail= require("../controllers/productControllers/getProductDetail");
-
-
+const getProducts = require("../controllers/productControllers/getProducts");
 
 
 const getProductsHandler = async (req, res) => {

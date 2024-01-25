@@ -8,7 +8,7 @@ const {
     getFilteredUsers
 } = require('../handlers/usersHandlers');
 
-const productRouter = Router();
+const userRouter = Router();
 
 userRouter.get('/', getUsersHandler);
 
