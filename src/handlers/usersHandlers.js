@@ -1,4 +1,13 @@
 const getUserDetail= require("../controllers/userControllers/getUserDetail");
+const getUsers = require("../controllers/userControllers/getUsers")
+const getUsersHandler = async (req, res) => {
+    try {
+        const response = await getUsers();
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({error: error.nessage});
+    }
+};
 
 const getUserDetailHandler = async (req, res) => {
     let { id } = req.params;
@@ -15,5 +24,5 @@ const getUserDetailHandler = async (req, res) => {
 };
 
 module.exports={
-    getUserDetailHandler,
+    getUserDetailHandler,getUsersHandler
 };
