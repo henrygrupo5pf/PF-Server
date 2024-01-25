@@ -2,7 +2,7 @@ const DataTypes = require('sequelize');
 const { Sequelize } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('ProductService', {
+  sequelize.define('Product', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -16,19 +16,23 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    type: {
-      type: DataTypes.ENUM('Product', 'Service'),
+    category: {
+      type: DataTypes.ENUM('Books', 'Electronic Devices', 'Lab Equipment', 'Stationery'),
+      allowNull: false,
+    },
+    category: {
+      type: DataTypes.ENUM('Books', 'Electronic Devices', 'Lab Equipment', 'Repairs', 'Plumbing', 'Electricity'),
       allowNull: false,
     },
     cost: {
       type: DataTypes.DECIMAL,
       allowNull: false,
       validate: {
-	isGreaterThanZero(value) {
-	  if (value <= 0) {
-	    throw new Error('Cost must be greater than 0.');
-	  }
-	},
+	      isGreaterThanZero(value) {
+	        if (value <= 0) {
+	          throw new Error('Cost must be greater than 0.');
+	        }
+	      },
       },
     },
     description: {
