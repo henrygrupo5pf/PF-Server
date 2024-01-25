@@ -1,4 +1,4 @@
-const getProductDetail= require("../controllers/getProductDetail");
+const getProductDetail= require("../controllers/productControllers/getProductDetail");
 
 
 
