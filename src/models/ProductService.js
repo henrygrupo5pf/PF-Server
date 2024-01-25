@@ -20,15 +20,19 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('Product', 'Service'),
       allowNull: false,
     },
+    category: {
+      type: DataTypes.ENUM('Books', 'Electronic Devices', 'Lab Equipment', 'Repairs', 'Plumbing', 'Electricity'),
+      allowNull: false,
+    },
     cost: {
       type: DataTypes.DECIMAL,
       allowNull: false,
       validate: {
-	isGreaterThanZero(value) {
-	  if (value <= 0) {
-	    throw new Error('Cost must be greater than 0.');
-	  }
-	},
+	      isGreaterThanZero(value) {
+	        if (value <= 0) {
+	          throw new Error('Cost must be greater than 0.');
+	        }
+	      },
       },
     },
     description: {
