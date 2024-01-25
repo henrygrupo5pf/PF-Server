@@ -16,8 +16,8 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    type: {
-      type: DataTypes.ENUM('Product', 'Service'),
+    category: {
+      type: DataTypes.ENUM('Books', 'Electronic Devices', 'Lab Equipment', 'Stationery'),
       allowNull: false,
     },
     category: {
