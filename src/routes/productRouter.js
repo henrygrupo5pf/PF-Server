@@ -12,14 +12,14 @@ const productRouter = Router();
 
 productRouter.get('/', getProductsHandler);
 
-productRouter.get('/name', searchProductHandler);
+productRouter.get('/name', searchProductHandler); //falta
 
 productRouter.get('/:id', getProductDetailHandler);
 
 productRouter.get('/filter', getFilteredProducts);
 
-productRouter.post('/', postProductHandler);
+productRouter.post('/', postProductHandler); 
 
-productRouter.put('/:id', updateProductHandler);
+productRouter.put('/:id', updateProductHandler); //falta
 
 module.exports = productRouter;

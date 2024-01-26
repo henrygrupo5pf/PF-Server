@@ -10,16 +10,16 @@ const {
 
 const userRouter = Router();
 
-userRouter.get('/', getUsersHandler);
+userRouter.get('/', getUsersHandler); //falta
 
-userRouter.get('/name', searchUserHandler);
+userRouter.get('/name', searchUserHandler); //falta
 
 userRouter.get('/:id', getUserDetailHandler);
 
-userRouter.get('/filter', getFilteredUsers);
+userRouter.get('/filter', getFilteredUsers); //falta
 
-userRouter.post('/', postUserHandler);
+userRouter.post('/', postUserHandler); //falta
 
-userRouter.put('/:id', updateUserHandler);
+userRouter.put('/:id', updateUserHandler); //falta
 
 module.exports = userRouter;
