@@ -1,5 +1,6 @@
-const getProductDetail= require("../controllers/productControllers/getProductDetail");
+const getProductDetail = require("../controllers/productControllers/getProductDetail");
 const getProducts = require("../controllers/productControllers/getProducts");
+const filterProducts = require('../controllers/productControllers/getFilteredProducts');
 
 
 const getProductsHandler = async (req, res) => {
@@ -45,9 +46,11 @@ const getProductDetailHandler = async (req, res) => {
 };
 
 const getFilteredProducts = async (req, res) => {
-    let { category } = req.query;
+    let { category, costRange } = req.query;
+    const [minCost, maxCost] = costRange ? costRange.split('-').map(Number) : [null, null];
+    //I'm assuming a selector in the front-end with options like 1-100, 101-200 to filter by price.
     try {
-        const response = await filterProducts(category);
+        const response = await filterProducts(category, minCost, maxCost);
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({error: error.nessage});
