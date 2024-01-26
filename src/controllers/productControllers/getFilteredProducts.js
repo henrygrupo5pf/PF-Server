@@ -1,11 +1,12 @@
 const { Product, User } = require('../../db');
+const { Op } = require("sequelize")
 
 const filterProducts = async (category, minCost, maxCost) => {
     const filterCriteria = {
         category,
         cost: {
-            [Sequelize.Op.gte]: minCost || 0,
-            [Sequelize.Op.lte]: maxCost || Number.MAX_SAFE_INTEGER,
+            [Op.gte]: minCost || 0,
+            [Op.lte]: maxCost || Number.MAX_SAFE_INTEGER,
         },
     };
 
