@@ -1,5 +1,6 @@
 const getUserDetail= require("../controllers/userControllers/getUserDetail");
-const getUsers = require("../controllers/userControllers/getUsers")
+const getUsers = require("../controllers/userControllers/getUsers");
+
 const getUsersHandler = async (req, res) => {
     try {
         const response = await getUsers();
@@ -8,6 +9,8 @@ const getUsersHandler = async (req, res) => {
         res.status(500).json({error: error.nessage});
     }
 };
+
+const searchUserHandler = async (req, res) => { };
 
 const getUserDetailHandler = async (req, res) => {
     let { id } = req.params;
@@ -23,6 +26,17 @@ const getUserDetailHandler = async (req, res) => {
     }
 };
 
+const getFilteredUsers = async (req, res) => { };
+
+const postUserHandler = async (req, res) => { };
+
+const updateUserHandler = async (req, res) => { };
+
 module.exports={
-    getUserDetailHandler,getUsersHandler
+    getUsersHandler,
+    searchUserHandler,
+    getUserDetailHandler,
+    getFilteredUsers,
+    postUserHandler,
+    updateUserHandler
 };

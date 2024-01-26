@@ -1,7 +1,7 @@
 const getProductDetail = require("../controllers/productControllers/getProductDetail");
 const getProducts = require("../controllers/productControllers/getProducts");
 const filterProducts = require('../controllers/productControllers/getFilteredProducts');
-
+const createProduct = require("../controllers/productControllers/postProduct");
 
 const getProductsHandler = async (req, res) => {
     try {
@@ -62,7 +62,7 @@ const postProductHandler = async (req, res) => {
     let activeStatus = true;
     if (!userId || !name || !type || !category || !cost || !description || !photo) {
         res.status(401).json({error: "Incomplete Data"});
-    } else if (typeof cost != 'number' || number >= 0) {
+    } else if (typeof cost != 'number' || cost <= 0) {
         res.status(401).json({error: "Incomplete Data"});
     } else {
         try {
