@@ -1,4 +1,4 @@
-const { Product } = require('../../db');
+const { Product, User } = require('../../db');
 
 const filterProducts = async (category, minCost, maxCost) => {
     const filterCriteria = {
@@ -15,7 +15,14 @@ const filterProducts = async (category, minCost, maxCost) => {
 
     const products = await Product.findAll({
         where: cleanedFilterCriteria,
+        include: {
+            model: User,
+            attributes: ["name", "id"]
+        }
     });
+    if (!products) {
+        throw new Error('There are no products with these characteristics.')
+    }
 
     return products;
 };
