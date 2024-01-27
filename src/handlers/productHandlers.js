@@ -3,6 +3,7 @@ const getSearchProduct=require("../controllers/productControllers/getSearchProdu
 const getProductDetail=require("../controllers/productControllers/getProductDetail");
 const getfilterProducts=require("../controllers/productControllers/getfilterProducts");
 const postCreateProduct=require("../controllers/productControllers/postCreateProduct");
+const putProduct = require('../controllers/productControllers/putProduct');
 
 
 const getProductsHandler= async(req, res)=>{
@@ -76,7 +77,24 @@ const postProductHandler = async (req, res) => {
     }
 };
 
-
+const putProductHandler = async (req, res) => {
+    let { cost, activeStatus } = req.body;
+    let { id } = req.params;
+    if (cost && cost < 0) {
+        res.status(401).json({error: "El costo debe ser mayor a 0."})
+    } else {
+        try {
+            let response = await putProduct({ id, cost, activeStatus });
+            if (response.error) {
+                res.status(400).json(response);
+            } else {
+                res.status(200).json(response);
+            }
+        } catch (error) {
+            res.status(500).json({error: error.message});
+        }
+    }
+}
 
 module.exports={
     getProductsHandler,
@@ -84,4 +102,5 @@ module.exports={
     getProductDetailHandler,
     getFilteredProductsHandler,
     postProductHandler,
+    putProductHandler,
 };

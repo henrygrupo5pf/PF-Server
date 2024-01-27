@@ -5,7 +5,7 @@ const {
     getProductDetailHandler,
     getFilteredProductsHandler,
     postProductHandler,
-/*     putProductHandler */
+    putProductHandler,
 } = require('../handlers/productHandlers');
 
 const productRouter = Router();
@@ -14,9 +14,7 @@ productRouter.get('/', getProductsHandler);
 productRouter.get('/name', getsearchProductHandler);
 productRouter.get('/filter', getFilteredProductsHandler);
 productRouter.get('/:id', getProductDetailHandler);
-
 productRouter.post('/', postProductHandler); 
-
-/* productRouter.put('/:id', putProductHandler);  */
+productRouter.put('/:id', putProductHandler);
 
 module.exports = productRouter;
