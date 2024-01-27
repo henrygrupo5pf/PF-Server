@@ -1,11 +1,13 @@
-require("dotenv").config();
 const { Sequelize } = require("sequelize");
+require("dotenv").config();
 
 const fs = require('fs');
 const path = require('path');
 const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME
 } = process.env;
+
+console.log(DB_HOST);
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
   logging: false, 
@@ -28,20 +30,20 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, ProductService, Reservation, ShoppingCart } = sequelize.models;
+const { User, Product, Reservation, ShoppingCart } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-User.hasMany(ProductService, { foreignKey: 'userId' });
-ProductService.belongsTo(User, { foreignKey: 'userId' });
-ProductService.hasMany(Reservation, { foreignKey: 'productId' });
-Reservation.belongsTo(ProductService, { foreignKey: 'productId' });
+User.hasMany(Product, { foreignKey: 'userId' });
+Product.belongsTo(User, { foreignKey: 'userId' });
+Product.hasMany(Reservation, { foreignKey: 'productId' });
+Reservation.belongsTo(Product, { foreignKey: 'productId' });
 User.hasMany(Reservation, { foreignKey: 'userId' });
 Reservation.belongsTo(User, { foreignKey: 'userId' });
 User.hasMany(ShoppingCart, { foreignKey: 'userId' });
 ShoppingCart.belongsTo(User, { foreignKey: 'userId' });
-ProductService.belongsToMany(ShoppingCart, { through: 'CartProduct' });
-ShoppingCart.belongsToMany(ProductService, { through: 'CartProduct' });
+Product.belongsToMany(ShoppingCart, { through: 'CartProduct' });
+ShoppingCart.belongsToMany(Product, { through: 'CartProduct' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

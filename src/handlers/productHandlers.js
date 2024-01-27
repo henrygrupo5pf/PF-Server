@@ -1,11 +1,7 @@
-const {
-  getProducts,
-  searchProduct,
-  getProductDetail,
-  createProduct,
-  updateProduct,
-  filterProducts,
-} = require("../controllers/productControllers");
+const getProductDetail = require("../controllers/productControllers/getProductDetail");
+const getProducts = require("../controllers/productControllers/getProducts");
+const filterProducts = require("../controllers/productControllers/getFilteredProducts");
+const createProduct = require("../controllers/productControllers/postProduct");
 
 const getProductsHandler = async (req, res) => {
   try {
@@ -19,14 +15,12 @@ const getProductsHandler = async (req, res) => {
   }
 };
 
-
 const getShoppingCartHandler = async (limit, offset) => {
   return await ShoppingCart.findAll({
     limit: limit,
     offset: offset,
   });
 };
-
 
 const addToShoppingCartHandler = async (req, res) => {
   try {
