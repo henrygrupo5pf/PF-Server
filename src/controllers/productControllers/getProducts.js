@@ -1,21 +1,13 @@
-// controllers/productControllers.js
+const { Product } = require('../../db.js');
 
-const { Product } = require('../db.js');
-
-// Controlador para obtener todos los productos
-async function getProducts() {
+const getProducts= async()=>{
     try {
-        // Utiliza el modelo ProductService para obtener todos los productos
         const products = await Product.findAll();
-        return products; // Devuelve la lista de productos
+        return products;  
     } catch (error) {
-        // Maneja cualquier error que pueda ocurrir
-        return { error: error.message };
+        throw error;  
     }
 }
 
-module.exports = { 
-    getProducts,
-    
-};
 
+module.exports = getProducts;
