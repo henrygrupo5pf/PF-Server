@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
 	      isGreaterThanZero(value) {
-	        if (value <= 0) {
+	        if (value < 0) {
 	          throw new Error('Cost must be greater than 0.');
 	        }
 	      },
