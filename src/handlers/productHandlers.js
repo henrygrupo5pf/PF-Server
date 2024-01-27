@@ -19,7 +19,7 @@ const getProductsHandler = async (req, res) => {
   }
 };
 
-// Obtener el carrito de compras paginado
+
 const getShoppingCartHandler = async (limit, offset) => {
   return await ShoppingCart.findAll({
     limit: limit,
@@ -27,7 +27,7 @@ const getShoppingCartHandler = async (limit, offset) => {
   });
 };
 
-// Agregar producto al carrito de compras
+
 const addToShoppingCartHandler = async (req, res) => {
   try {
     const { userId, productId, quantity } = req.body;
