@@ -1,14 +1,14 @@
 const getProducts=require("../controllers/productControllers/getProducts");
 const getSearchProduct=require("../controllers/productControllers/getSearchProduct");
 const getProductDetail=require("../controllers/productControllers/getProductDetail");
-const getfilterProducts=require("../controllers/productControllers/getfilterProducts");
 const postCreateProduct=require("../controllers/productControllers/postCreateProduct");
 const getFilteredAndPaginatedProducts=require("../controllers/productControllers/getFilteredAndPaginatedProducts");
 const putProduct = require('../controllers/productControllers/putProduct');
 
 const getProductsHandler= async(req, res)=>{
+    let { page, pageSize } = req.query;
     try {
-        const response = await getProducts();
+        const response = await getProducts(page, pageSize);
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({error: error.message});
@@ -100,7 +100,6 @@ module.exports={
     getProductsHandler,
     getsearchProductHandler,
     getProductDetailHandler,
-    getFilteredProductsHandler,
     postProductHandler,
     getFilteredAndPaginatedProductsHandler,
     putProductHandler,

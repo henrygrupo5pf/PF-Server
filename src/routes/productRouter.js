@@ -3,7 +3,7 @@ const {
     getProductsHandler,
     getsearchProductHandler,
     getProductDetailHandler,
-    getFilteredProductsHandler,
+    getFilteredAndPaginatedProductsHandler,
     postProductHandler,
     putProductHandler,
 } = require('../handlers/productHandlers');
@@ -12,7 +12,7 @@ const productRouter = Router();
 
 productRouter.get('/', getProductsHandler);
 productRouter.get('/name', getsearchProductHandler);
-productRouter.get('/filter', getFilteredProductsHandler);
+productRouter.get('/filter', getFilteredAndPaginatedProductsHandler);
 productRouter.get('/:id', getProductDetailHandler);
 productRouter.post('/', postProductHandler); 
 productRouter.put('/:id', putProductHandler);
