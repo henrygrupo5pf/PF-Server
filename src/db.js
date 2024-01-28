@@ -14,9 +14,9 @@ const {
 // });
 
 const sequelize = new Sequelize(`${DB_URL}`, {
-  logging: console.log, 
+  logging: false, 
   native: false, 
-  dialect: 'mysql', // o el dialecto de tu base de datos (puede ser 'postgres' para PostgreSQL, 'mssql' para Microsoft SQL Server, etc.)
+  dialect: 'postgres', // o el dialecto de tu base de datos (puede ser 'postgres' para PostgreSQL, 'mssql' para Microsoft SQL Server, etc.)
   dialectOptions: {
     ssl: {
       require: true,
