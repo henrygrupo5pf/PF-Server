@@ -4,6 +4,7 @@ const getProductDetail=require("../controllers/productControllers/getProductDeta
 const getfilterProducts=require("../controllers/productControllers/getfilterProducts");
 const postCreateProduct=require("../controllers/productControllers/postCreateProduct");
 const getFilteredAndPaginatedProducts=require("../controllers/productControllers/getFilteredAndPaginatedProducts");
+const putProduct = require('../controllers/productControllers/putProduct');
 
 const getProductsHandler= async(req, res)=>{
     try {
@@ -47,18 +48,6 @@ const getProductDetailHandler = async (req, res) => {
     }
 };
 
-const getFilteredProductsHandler = async (req, res) => {
-    let { category, costRange } = req.query;
-    const [minCost, maxCost] = costRange ? costRange.split('-').map(Number) : [null, null];
-    //I'm assuming a selector in the front-end with options like 1-100, 101-200 to filter by price.
-    try {
-        const response = await getfilterProducts(category, minCost, maxCost);
-        res.status(200).json(response);
-    } catch (error) {
-        res.status(500).json({error: error.message});
-    }
-};
-
 const postProductHandler = async (req, res) => {
     let { userId, name, category, cost, description, photo } = req.body;
     let activeStatus = true;
@@ -88,9 +77,24 @@ const getFilteredAndPaginatedProductsHandler = async (req, res) => {
     }
 };
 
-productRouter.get('/filter', getFilteredAndPaginatedProductsHandler);
-
-
+const putProductHandler = async (req, res) => {
+    let { cost, activeStatus } = req.body;
+    let { id } = req.params;
+    if (cost && cost < 0) {
+        res.status(401).json({error: "El costo debe ser mayor a 0."})
+    } else {
+        try {
+            let response = await putProduct({ id, cost, activeStatus });
+            if (response.error) {
+                res.status(400).json(response);
+            } else {
+                res.status(200).json(response);
+            }
+        } catch (error) {
+            res.status(500).json({error: error.message});
+        }
+    }
+}
 
 module.exports={
     getProductsHandler,
@@ -98,5 +102,6 @@ module.exports={
     getProductDetailHandler,
     getFilteredProductsHandler,
     postProductHandler,
-    getFilteredAndPaginatedProductsHandler
+    getFilteredAndPaginatedProductsHandler,
+    putProductHandler,
 };
