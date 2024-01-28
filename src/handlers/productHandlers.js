@@ -3,7 +3,7 @@ const getSearchProduct=require("../controllers/productControllers/getSearchProdu
 const getProductDetail=require("../controllers/productControllers/getProductDetail");
 const getfilterProducts=require("../controllers/productControllers/getfilterProducts");
 const postCreateProduct=require("../controllers/productControllers/postCreateProduct");
-
+const getFilteredAndPaginatedProducts=require("../controllers/productControllers/getFilteredAndPaginatedProducts");
 
 const getProductsHandler= async(req, res)=>{
     try {
@@ -76,6 +76,20 @@ const postProductHandler = async (req, res) => {
     }
 };
 
+const getFilteredAndPaginatedProductsHandler = async (req, res) => {
+    let { page, pageSize, category, costRange } = req.query;
+    const [minCost, maxCost] = costRange ? costRange.split('-').map(Number) : [null, null];
+
+    try {
+        const response = await getFilteredAndPaginatedProducts(page, pageSize, category, minCost, maxCost);
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+productRouter.get('/filter', getFilteredAndPaginatedProductsHandler);
+
 
 
 module.exports={
@@ -84,4 +98,5 @@ module.exports={
     getProductDetailHandler,
     getFilteredProductsHandler,
     postProductHandler,
+    getFilteredAndPaginatedProductsHandler
 };

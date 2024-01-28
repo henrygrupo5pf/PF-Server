@@ -1,11 +1,14 @@
 const { Product } = require('../../db.js');
 
-const getProducts= async()=>{
+const getProducts = async (page = 1, pageSize = 10) => {
     try {
-        const products = await Product.findAll();
-        return products;  
+        const products = await Product.findAll({
+            offset: (page - 1) * pageSize,
+            limit: pageSize,
+        });
+        return products;
     } catch (error) {
-        throw error;  
+        throw error;
     }
 }
 
