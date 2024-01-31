@@ -4,12 +4,17 @@ require("dotenv").config();
 const fs = require('fs');
 const path = require('path');
 const {
+<<<<<<< HEAD
   /* DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME */ DB_URL
+=======
+  DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME, DB_URL
+>>>>>>> 408c964886c4c0a47858880c7c5c5daaf1e56034
 } = process.env;
 
 /* para local */
 /* `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}` */
 
+<<<<<<< HEAD
 const sequelize = new Sequelize(`${DB_URL}`, {
   logging: false, 
   native: false, 
@@ -17,6 +22,21 @@ const sequelize = new Sequelize(`${DB_URL}`, {
     ssl: {
       require: true,
       rejectUnauthorized: false, 
+=======
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
+//   logging: false, 
+//   native: false, 
+// });
+
+const sequelize = new Sequelize(`${DB_URL}`, {
+  logging: false, 
+  native: false, 
+  dialect: 'postgres', // o el dialecto de tu base de datos (puede ser 'postgres' para PostgreSQL, 'mssql' para Microsoft SQL Server, etc.)
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, // O ajusta según tus necesidades de seguridad
+>>>>>>> 408c964886c4c0a47858880c7c5c5daaf1e56034
     },
   },
 });
