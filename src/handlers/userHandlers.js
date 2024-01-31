@@ -1,4 +1,5 @@
 const postUser = require('../controllers/userControllers/postUser');
+const getUserDetail = require('../controllers/userControllers/getUserDetail')
 
 const postUserHandler = async (req, res) => {
     let { name, email, password, country, location, phoneNumber } = req.body;
@@ -16,4 +17,22 @@ const postUserHandler = async (req, res) => {
     }
 };
 
-module.exports = postUserHandler;
+const getUserDetailHandler = async(req, res) => {
+    let {id} = req.params;
+    try {
+        const response = await getUserDetail(id);
+        if (response.error) {
+            res.status(400).json({error: response.error});
+        } else {
+            res.status(200).json(response);
+        }
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
+
+
+module.exports = {
+    postUserHandler,
+    getUserDetailHandler
+}
