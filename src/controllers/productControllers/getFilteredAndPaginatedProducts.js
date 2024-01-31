@@ -23,7 +23,7 @@ const getFilteredAndPaginatedProducts = async (page = 1, pageSize = 10, category
     );
 
     try {
-        const products = await Product.findAll({
+        const { count, rows: products } = await Product.findAndCountAll({
             where: cleanedFilterCriteria,
             offset: (page - 1) * pageSize,
             limit: pageSize,
@@ -32,7 +32,13 @@ const getFilteredAndPaginatedProducts = async (page = 1, pageSize = 10, category
                 attributes: ["name", "id"]
             }
         });
-        return products;
+
+        const totalPages = Math.ceil(count / pageSize);
+
+        return {
+            products,
+            totalPages,
+        };
     } catch (error) {
         throw error;
     }
