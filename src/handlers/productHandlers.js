@@ -15,22 +15,22 @@ const getProductsHandler= async(req, res)=>{
     }
 };
 
-const getsearchProductHandler = async (req, res) => {
-    let { name } = req.query;
+const getSearchProductHandler = async (req, res) => {
+    let { name, page, pageSize } = req.query;
     try {
         if (!name) {
-            const response = await getProducts();
+            const response = await getProducts(page, pageSize);
             res.status(200).json(response);
         } else {
-            const response = await getSearchProduct(name);
+            const response = await getSearchProduct(name, page, pageSize);
             if (response.error) {
-                res.status(400).json({error: response.error});
+                res.status(400).json({ error: response.error });
             } else {
                 res.status(200).json(response);
             }
         }
     } catch (error) {
-        res.status(500).json({error: error.message});
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -98,7 +98,7 @@ const putProductHandler = async (req, res) => {
 
 module.exports={
     getProductsHandler,
-    getsearchProductHandler,
+    getSearchProductHandler,
     getProductDetailHandler,
     postProductHandler,
     getFilteredAndPaginatedProductsHandler,
