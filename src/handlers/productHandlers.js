@@ -66,11 +66,11 @@ const postProductHandler = async (req, res) => {
 };
 
 const getFilteredAndPaginatedProductsHandler = async (req, res) => {
-    let { page, pageSize, category, costRange } = req.query;
+    let { page, pageSize, category, costRange, country, location } = req.query;
     const [minCost, maxCost] = costRange ? costRange.split('-').map(Number) : [null, null];
 
     try {
-        const response = await getFilteredAndPaginatedProducts(page, pageSize, category, minCost, maxCost);
+        const response = await getFilteredAndPaginatedProducts(page, pageSize, category, minCost, maxCost, country, location);
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({ error: error.message });
