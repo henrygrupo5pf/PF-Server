@@ -1,7 +1,7 @@
 const { Op } = require("sequelize");
 const { Product, User } = require('../../db');
 
-const getFilteredAndPaginatedProducts = async (page = 1, pageSize = 10, category, minCost, maxCost, country, location) => {
+const getFilteredAndPaginatedProducts = async (page = 1, pageSize = 10, category, minCost, maxCost, country, location, name) => {
     const filterCriteria = {
         category,
         cost: {
@@ -16,6 +16,12 @@ const getFilteredAndPaginatedProducts = async (page = 1, pageSize = 10, category
 
     if (location) {
         filterCriteria['$User.location$'] = location;
+    }
+
+    if (name) {
+        filterCriteria.name = {
+            [Op.iLike]: `%${name}%`,
+        };
     }
 
     const cleanedFilterCriteria = Object.fromEntries(
