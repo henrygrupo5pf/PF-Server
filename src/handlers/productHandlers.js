@@ -54,7 +54,7 @@ const postProductHandler = async (req, res) => {
     if (!userId || !name || !category || !cost || !description || !photo) {
         res.status(401).json({error: "Incomplete Data"});
     } else if (typeof cost != 'number' || cost < 0) {
-        res.status(401).json({error: "Incomplete Data"});
+        res.status(401).json({error: "cost is not a number or is lower than 0"});
     } else {
         try {
             let response = await postCreateProduct({ userId, name, category, cost, description, photo, activeStatus });
