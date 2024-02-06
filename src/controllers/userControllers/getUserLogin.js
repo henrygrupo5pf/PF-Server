@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const { User, Product } = require('../../db');
 
 const postUserLogin = async (email, password) => {
