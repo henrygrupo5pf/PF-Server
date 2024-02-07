@@ -20,25 +20,11 @@ const postCheckOutHandler = async (req, res) => {
     }
 };
 
-const getChekOutSuccess = async (req, res) => {
-
-    //aca te tiene que enviar a otra url que a su vez te redireccione a home
-    //del front
-    //tiene que tener un contador y cuando se cumpla que redireccione
-    res.send("Success")
-};
-const getChekOutCancel = async (req, res) => {
-      //aca lo mismo que arriba
-    res.send("Cancel")
-};
-
-
 
 
 
 module.exports = {
     postCheckOutHandler,
-    getChekOutSuccess,
-    getChekOutCancel
+
 
 }
