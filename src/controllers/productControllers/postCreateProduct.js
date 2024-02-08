@@ -9,7 +9,7 @@ const postCreateProduct= async({userId, name, category, cost, description, photo
     }
 
     return newProduct
-
+//PONER LA RELACION N A N CON SHOPPINGCART
 };
 
 module.exports=postCreateProduct
