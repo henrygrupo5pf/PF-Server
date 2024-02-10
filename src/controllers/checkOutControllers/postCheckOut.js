@@ -30,12 +30,12 @@ const checkOut = async (info) => {
     payment_method_types: ["card"],
     line_items: lineItems,
     mode: "payment",
-    /* success_url: "https://pf-front-7krw.onrender.com/checkout/success",
-    cancel_url: "pf-server-93lj.onrender.com/checkout/cancel", */
+    success_url: "https://pf-front-7krw.onrender.com/checkout/success",
+    cancel_url: "https://pf-front-7krw.onrender.com/checkout/cancel",
 
     //URL de prueba descomentar abajo
-    success_url: "http://localhost:5173/checkout/success",
-    cancel_url: "http://localhost:5173/checkout/cancel",
+    /* success_url: "http://localhost:5173/checkout/success",
+    cancel_url: "http://localhost:5173/checkout/cancel", */
   });
 
 
