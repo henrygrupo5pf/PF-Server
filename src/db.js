@@ -4,7 +4,7 @@ require("dotenv").config();
 const fs = require('fs');
 const path = require('path');
 const {
-  // DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME, 
+   DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME, 
   DB_URL
 } = process.env;
 
@@ -15,11 +15,13 @@ const {
 const sequelize = new Sequelize(`${DB_URL}`, {
   logging: false, 
   native: false, 
-  dialect: 'postgres', // o el dialecto de tu base de datos (puede ser 'postgres' para PostgreSQL, 'mssql' para Microsoft SQL Server, etc.)
+  dialect: 'postgres', 
   dialectOptions: {
+
+  
     ssl: {
       require: true,
-      rejectUnauthorized: false, // O ajusta según tus necesidades de seguridad
+      rejectUnauthorized: false, 
     },
   },
 });
