@@ -12,18 +12,18 @@ const {
 /* `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}` */
 
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
+const sequelize = new Sequelize(`${DB_URL}`, {
   logging: false, 
   native: false, 
-  dialect: 'postgres', // o el dialecto de tu base de datos (puede ser 'postgres' para PostgreSQL, 'mssql' para Microsoft SQL Server, etc.)
-/*   dialectOptions: {
+  dialect: 'postgres', 
+  dialectOptions: {
 
   
     ssl: {
       require: true,
       rejectUnauthorized: false, 
     },
-  }, */
+  },
 });
 
 const basename = path.basename(__filename);

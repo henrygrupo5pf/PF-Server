@@ -4,6 +4,8 @@ const { modelsCheckOut } = require("../controllers/checkOutControllers/postModel
 const postCheckOutHandler = async (req, res) => {
     const checkOutInfo = req.body.cartItems;
     const checkOutModels = req.body
+
+    console.log();
     
     if (!Array.isArray(checkOutInfo)) {
         res.status(400).json({ error: "La propiedad 'cartItems' no es un array." });
@@ -20,7 +22,7 @@ const postCheckOutHandler = async (req, res) => {
         if (response.error) {
             res.status(400).json({ error: response.error });
         } /* if (modelResponse.error) {
-            res.status(400).json({ error: modelResponse.error }); DESCOMENTAR CUANDO SE ESTE APUNTANDO A LA BD EN DEPLOY
+            res.status(400).json({ error: modelResponse.error });
         } */ else {
             res.status(200).json(response);
         }

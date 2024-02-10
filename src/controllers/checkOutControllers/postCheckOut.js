@@ -24,7 +24,7 @@ const checkOut = async (info) => {
     payment_method_types: ["card"],
     line_items: lineItems,
     mode: "payment",
-    /* success_url: "https://pf-server-93lj.onrender.com/checkout/success",
+   /*  success_url: "https://pf-server-93lj.onrender.com/checkout/success",
     cancel_url: "https://pf-server-93lj.onrender.com/checkout/cancel", */
 
     //URL de prueba descomentar abajo
@@ -33,7 +33,7 @@ const checkOut = async (info) => {
   });
 
 
-  return /* session */ "hola"
+  return session 
 
 };
 

@@ -2,16 +2,12 @@ const { ShoppingCart, Reservation, Product } = require("../../db");
 
 const modelsCheckOut = async (info) => {
     try {
-
+        console.log(info);
         const id = info.userId.id;
-        const currentDate = new Date();
+        const dateOfPurchaselDate= new Date()
 
-        const year = currentDate.getFullYear();
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const day = String(currentDate.getDate()).padStart(2, '0');
-        const formattedDate = `${year}-${month}-${day}`;
 
-        const shoppingCart = await ShoppingCart.create({ userId: id, dateOfPurchase: formattedDate });
+        const shoppingCart = await ShoppingCart.create({ userId: id, dateOfPurchase: dateOfPurchaselDate });
 
         await Promise.all(info.cartItems.map(async(item) => {
             const product = await Product.findByPk(item.id);
@@ -29,11 +25,14 @@ const modelsCheckOut = async (info) => {
         }));
 
         await Promise.all(info.cartItems.map(async(item) => {
+            let initialDate= new Date(item.startDate)
+            let finalDate= new Date(item.endDate)
+            
             const reservation = await Reservation.create({
                 userId: id,
-                productId: "asd",
-                startTime: formattedDate,
-                endTime:"asd", 
+                productId: item.id, 
+                startTime: initialDate.toISOString(),
+                endTime: finalDate.toISOString(), //necesito del front
             });
         }))
 
