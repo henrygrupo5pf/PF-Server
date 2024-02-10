@@ -2,7 +2,7 @@ const { ShoppingCart, Reservation, Product } = require("../../db");
 
 const modelsCheckOut = async (info) => {
     try {
-        console.log(info);
+        
         const id = info.userId.id;
         const dateOfPurchaselDate= new Date()
 
@@ -10,7 +10,10 @@ const modelsCheckOut = async (info) => {
         const shoppingCart = await ShoppingCart.create({ userId: id, dateOfPurchase: dateOfPurchaselDate });
 
         await Promise.all(info.cartItems.map(async(item) => {
+          
+            
             const product = await Product.findByPk(item.id);
+          
 
             if (!product) {
                 throw new Error(`Hubo un problema con un ID de un producto.`);
@@ -32,7 +35,7 @@ const modelsCheckOut = async (info) => {
                 userId: id,
                 productId: item.id, 
                 startTime: initialDate.toISOString(),
-                endTime: finalDate.toISOString(), //necesito del front
+                endTime: finalDate.toISOString(), 
             });
         }))
 
