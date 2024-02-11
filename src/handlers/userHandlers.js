@@ -1,6 +1,17 @@
 const postUser = require('../controllers/userControllers/postUser');
-const getUserDetail = require('../controllers/userControllers/getUserDetail')
-const getUserLogin = require('../controllers/userControllers/getUserLogin')
+const getUserDetail = require('../controllers/userControllers/getUserDetail');
+const getUserLogin = require('../controllers/userControllers/getUserLogin');
+const getUsers= require("../controllers/userControllers/getUsers");
+
+const getUserHandler=async(req, res)=>{
+    let { page, pageSize } = req.query;
+    try {
+        const response = await getUsers(page, pageSize);
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+};
 
 const postUserHandler = async (req, res) => {
     let { name, email, password, country, location, phoneNumber } = req.body;
@@ -50,5 +61,6 @@ const postUserLoginHandler = async (req, res) => {
 module.exports = {
     postUserHandler,
     getUserDetailHandler,
-    postUserLoginHandler
+    postUserLoginHandler,
+    getUserHandler
 }
