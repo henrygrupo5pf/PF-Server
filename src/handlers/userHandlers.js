@@ -5,7 +5,7 @@ const postUserHandler = async (req, res) => {
     let activeStatus = true;
     let admin = true;
     if (!name || !email || !password || !country || !location || !phoneNumber) {
-        res.status(401).json({error: "Incomplete Data"});
+        res.status(401).json({error: "Datos incompletos"});
     } else {
         try {
             let response = await postUser({ name, email, password, country, location, phoneNumber, activeStatus, admin });
