@@ -15,22 +15,22 @@ const getProductsHandler= async(req, res)=>{
     }
 };
 
-const getsearchProductHandler = async (req, res) => {
-    let { name } = req.query;
+const getSearchProductHandler = async (req, res) => {
+    let { name, page, pageSize } = req.query;
     try {
         if (!name) {
-            const response = await getProducts();
+            const response = await getProducts(page, pageSize);
             res.status(200).json(response);
         } else {
-            const response = await getSearchProduct(name);
+            const response = await getSearchProduct(name, page, pageSize);
             if (response.error) {
-                res.status(400).json({error: response.error});
+                res.status(400).json({ error: response.error });
             } else {
                 res.status(200).json(response);
             }
         }
     } catch (error) {
-        res.status(500).json({error: error.message});
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -54,7 +54,7 @@ const postProductHandler = async (req, res) => {
     if (!userId || !name || !category || !cost || !description || !photo) {
         res.status(401).json({error: "Incomplete Data"});
     } else if (typeof cost != 'number' || cost < 0) {
-        res.status(401).json({error: "Incomplete Data"});
+        res.status(401).json({error: "cost is not a number or is lower than 0"});
     } else {
         try {
             let response = await postCreateProduct({ userId, name, category, cost, description, photo, activeStatus });
@@ -66,11 +66,11 @@ const postProductHandler = async (req, res) => {
 };
 
 const getFilteredAndPaginatedProductsHandler = async (req, res) => {
-    let { page, pageSize, category, costRange } = req.query;
+    let { page, pageSize, category, costRange, country, location, name } = req.query;
     const [minCost, maxCost] = costRange ? costRange.split('-').map(Number) : [null, null];
 
     try {
-        const response = await getFilteredAndPaginatedProducts(page, pageSize, category, minCost, maxCost);
+        const response = await getFilteredAndPaginatedProducts(page, pageSize, category, minCost, maxCost, country, location, name);
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -98,7 +98,7 @@ const putProductHandler = async (req, res) => {
 
 module.exports={
     getProductsHandler,
-    getsearchProductHandler,
+    getSearchProductHandler,
     getProductDetailHandler,
     postProductHandler,
     getFilteredAndPaginatedProductsHandler,

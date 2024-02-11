@@ -1,7 +1,7 @@
 const { Op } = require("sequelize");
 const { Product, User } = require('../../db');
 
-const getFilteredAndPaginatedProducts = async (page = 1, pageSize = 10, category, minCost, maxCost) => {
+const getFilteredAndPaginatedProducts = async (page = 1, pageSize = 10, category, minCost, maxCost, country, location, name) => {
     const filterCriteria = {
         category,
         cost: {
@@ -10,12 +10,26 @@ const getFilteredAndPaginatedProducts = async (page = 1, pageSize = 10, category
         },
     };
 
+    if (country) {
+        filterCriteria['$User.country$'] = country;
+    }
+
+    if (location) {
+        filterCriteria['$User.location$'] = location;
+    }
+
+    if (name) {
+        filterCriteria.name = {
+            [Op.iLike]: `%${name}%`,
+        };
+    }
+
     const cleanedFilterCriteria = Object.fromEntries(
         Object.entries(filterCriteria).filter(([_, value]) => value != null)
     );
 
     try {
-        const products = await Product.findAll({
+        const { count, rows: products } = await Product.findAndCountAll({
             where: cleanedFilterCriteria,
             offset: (page - 1) * pageSize,
             limit: pageSize,
@@ -24,7 +38,13 @@ const getFilteredAndPaginatedProducts = async (page = 1, pageSize = 10, category
                 attributes: ["name", "id"]
             }
         });
-        return products;
+
+        const totalPages = Math.ceil(count / pageSize);
+
+        return {
+            products,
+            totalPages,
+        };
     } catch (error) {
         throw error;
     }
