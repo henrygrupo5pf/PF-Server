@@ -9,20 +9,23 @@ const {
 } = process.env;
 
 /* para local */
-/* `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}` */
-
-
-const sequelize = new Sequelize(`${DB_URL}`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
   logging: false, 
   native: false, 
-  dialect: 'postgres', // o el dialecto de tu base de datos (puede ser 'postgres' para PostgreSQL, 'mssql' para Microsoft SQL Server, etc.)
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false, // O ajusta según tus necesidades de seguridad
-    },
-  },
 });
+
+/*Servidor*/
+// const sequelize = new Sequelize(`${DB_URL}`, {
+//   logging: false, 
+//   native: false, 
+//   dialect: 'postgres', // o el dialecto de tu base de datos (puede ser 'postgres' para PostgreSQL, 'mssql' para Microsoft SQL Server, etc.)
+//   dialectOptions: {
+//     // ssl: {
+//     //   require: true,
+//     //   rejectUnauthorized: false, // O ajusta según tus necesidades de seguridad
+//     // },
+//   },
+// });
 
 const basename = path.basename(__filename);
 
