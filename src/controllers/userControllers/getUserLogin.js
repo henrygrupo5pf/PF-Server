@@ -1,6 +1,6 @@
 const { User, Product } = require('../../db');
 
-const postUserLogin = async (email, password) => {
+const getUserLogin = async (email, password) => {
 
     const dbUser = await User.findOne({
         where: { email: email },
@@ -9,11 +9,16 @@ const postUserLogin = async (email, password) => {
             attributes: ["name", "id", "photo"]
         }
     });
+
+    console.log("ACA ESTA EL DBUSER:       ",dbUser); //ACA ESTA EL PROBLEMA
+
     if (!dbUser) {
         throw new Error("User not found");
     }
 
     const passwordMatch = password === dbUser.password;
+
+    console.log("ACA ESTA EL PASSWORD:    ", passwordMatch);
 
     if (passwordMatch) {
             
@@ -26,4 +31,4 @@ const postUserLogin = async (email, password) => {
 
 };
 
-module.exports = postUserLogin;
+module.exports = getUserLogin;

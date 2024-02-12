@@ -43,10 +43,13 @@ const getUserDetailHandler = async(req, res) => {
     }
 }
 
-const postUserLoginHandler = async (req, res) => {
+const getUserLoginHandler = async (req, res) => {
     let {email, password} = req.body;
+  
     try {
+     
         const response = await getUserLogin(email, password);
+        console.log("ACA ESTA LA RESPUESTA DESPUES DE PASARLE LA INFO A LA FUNCION: ", response);
         if (response.error) {
             res.status(400).json({error: response.error});
         } else {
@@ -61,6 +64,6 @@ const postUserLoginHandler = async (req, res) => {
 module.exports = {
     postUserHandler,
     getUserDetailHandler,
-    postUserLoginHandler,
+    getUserLoginHandler,
     getUserHandler
 }
