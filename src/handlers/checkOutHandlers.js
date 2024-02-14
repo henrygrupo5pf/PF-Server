@@ -16,8 +16,8 @@ console.log("BODY:  ",checkOutModels)
     
     try {
         const response = await checkOut(checkOutInfo);
-        const modelResponse = await modelsCheckOut(checkOutModels);
         console.log("response:  ", response)
+        const modelResponse = await modelsCheckOut(checkOutModels);
         console.log("modelResponse:  ", modelResponse)
 
         if (response.error) {
