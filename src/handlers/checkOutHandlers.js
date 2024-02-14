@@ -4,12 +4,12 @@ const { modelsCheckOut } = require("../controllers/checkOutControllers/postModel
 const postCheckOutHandler = async (req, res) => {
     const checkOutInfo = req.body.cartItems;
     const checkOutModels = req.body
-
+console.log("CARTITEMS:  ",checkOutInfo)
+console.log("BODY:  ",checkOutModels)
 
     if (!Array.isArray(checkOutInfo)) {
         res.status(400).json({ error: "La propiedad 'cartItems' no es un array." });
     }
-
     if (!checkOutModels.userId) {
         res.status(400).json({ error: "La propiedad 'userId' no existe o es erronea." });
     }
@@ -17,7 +17,8 @@ const postCheckOutHandler = async (req, res) => {
     try {
         const response = await checkOut(checkOutInfo);
         const modelResponse = await modelsCheckOut(checkOutModels);
-    
+        console.log("response:  ", response)
+        console.log("modelResponse:  ", modelResponse)
 
         if (response.error) {
             res.status(400).json({ error: response.error });
