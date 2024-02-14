@@ -20,10 +20,10 @@ const sequelize = new Sequelize(`${DB_URL}`, {
   native: false, 
   dialect: 'postgres', // o el dialecto de tu base de datos (puede ser 'postgres' para PostgreSQL, 'mssql' para Microsoft SQL Server, etc.)
   dialectOptions: {
-    // ssl: {
-    //   require: true,
-    //   rejectUnauthorized: false, // O ajusta según tus necesidades de seguridad
-    // },
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, // O ajusta según tus necesidades de seguridad
+    },
   },
 });
 
