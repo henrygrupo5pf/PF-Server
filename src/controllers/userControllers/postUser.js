@@ -15,7 +15,7 @@ const postUser = async ({ name, email, password, country, location, phoneNumber,
         console.log("Correo enviado correctamente a:", email);
     } catch (error) {
         console.error("Error al enviar el correo:", error);
-        throw new Error("Error al enviar el correo electrónico");
+        // throw new Error("Error al enviar el correo electrónico");
     }
 
     return newUser;
