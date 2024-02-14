@@ -1,6 +1,6 @@
 const { User } = require('../../db');
 const transporter = require('../../utils/mailer');
-
+//Notificacion
 const postUser = async ({ name, email, password, country, location, phoneNumber, activeStatus, admin }) => {
     console.log('Creando usuario en la base de datos:', { name, email, country, location, phoneNumber, activeStatus, admin });
     const newUser = await User.create({ name, email, password, country, location, phoneNumber, activeStatus, admin });
