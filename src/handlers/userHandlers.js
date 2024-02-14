@@ -18,12 +18,15 @@ const postUserHandler = async (req, res) => {
     let activeStatus = true;
     let admin = true;
     if (!name || !email || !password || !country || !location || !phoneNumber) {
-        res.status(401).json({error: "Incomplete Data"});
+        res.status(401).json({error: "Datos incompletos"});
     } else {
         try {
+            console.log('Creando usuario:', { name, email, password, country, location, phoneNumber, activeStatus, admin });
             let response = await postUser({ name, email, password, country, location, phoneNumber, activeStatus, admin });
+            console.log('Usuario creado:', response);
             res.status(200).json(response);
         } catch (error) {
+            console.error('Error al crear usuario:', error);
             res.status(500).json({error: error.message});
         }
     }
