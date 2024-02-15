@@ -5,14 +5,15 @@ const { PRIVATE_KEY_STRIPE } = process.env;
 const stripe = new Stripe(PRIVATE_KEY_STRIPE);
 
 const checkOut = async (info) => {
-console.log("SOY CHECKOUT:  ", "HOLA")
-  const lineItems = info.map((item) => {
 
+  console.log("SOY LA INFO:  ", info)
+  const lineItems = info.map((item) => {
+console.log("SOY EL MAPEO:  ", "HOLA")
     const startDate = new Date(item.startDate);
     const endDate = new Date(item.endDate);
     const timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
     const totalDays = Math.ceil(timeDifference / (1000 * 3600 * 24))+1
-
+console.log("SOY DESPUES DE LA FECHA:  ", totalDays)
     return {
       price_data: {
         product_data: {
