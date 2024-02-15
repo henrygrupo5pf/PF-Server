@@ -5,7 +5,7 @@ const { PRIVATE_KEY_STRIPE } = process.env;
 const stripe = new Stripe(PRIVATE_KEY_STRIPE);
 
 const checkOut = async (info) => {
-
+console.log("SOY CHECKOUT:  ", "HOLA")
   const lineItems = info.map((item) => {
 
     const startDate = new Date(item.startDate);
@@ -38,7 +38,7 @@ const checkOut = async (info) => {
     cancel_url: "http://localhost:5173/checkout/cancel", */
   });
 
-
+console.log("SOY CHECKOUT TERMINANDO:  ", "CHAU")
   return session 
 
 };
