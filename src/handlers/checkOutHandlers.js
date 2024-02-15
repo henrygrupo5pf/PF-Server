@@ -11,7 +11,7 @@ const postCheckOutHandler = async (req, res) => {
     if (!checkOutModels.userId) {
         res.status(400).json({ error: "La propiedad 'userId' no existe o es erronea." });
     }
-    
+console.log("checkOutModels:  ", checkOutModels)
     try {
         const response = await checkOut(checkOutInfo);
         console.log("RESPONSE:  ", response)
