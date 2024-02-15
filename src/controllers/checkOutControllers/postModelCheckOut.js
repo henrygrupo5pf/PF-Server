@@ -2,7 +2,7 @@ const { ShoppingCart, Reservation, Product } = require("../../db");
 
 const modelsCheckOut = async (info) => {
     try {
-
+console.log("SOY modelsCheckOut:  ", "HOLA")
         const id = info.userId.id;
         const dateOfPurchaseDate = new Date()
 
