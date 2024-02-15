@@ -16,8 +16,8 @@ console.log("checkOutModels:  ", checkOutModels)
         console.log("RESPONSE:  ", "hola")
         const response = await checkOut(checkOutInfo);
         console.log("RESPONSE:  ", response)
-        const modelResponse = await modelsCheckOut(checkOutModels);
-        console.log("MODELRESPONSE:  ", modelResponse)
+      /*   const modelResponse = await modelsCheckOut(checkOutModels);
+        console.log("MODELRESPONSE:  ", modelResponse) */
 
         if (response.error) {
             res.status(400).json({ error: response.error });
