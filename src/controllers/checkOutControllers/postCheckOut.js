@@ -27,6 +27,8 @@ console.log("SOY DESPUES DE LA FECHA:  ", totalDays)
     };
   });
 
+  console.log("SOYlineItems :  ", lineItems)
+
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     line_items: lineItems,
