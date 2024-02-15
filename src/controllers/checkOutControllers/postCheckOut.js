@@ -2,7 +2,7 @@ const Stripe = require("stripe");
 require("dotenv").config();
 const { PRIVATE_KEY_STRIPE } = process.env;
 
-const stripe = new Stripe(PRIVATE_KEY_STRIPE);
+const stripe = new Stripe(/* PRIVATE_KEY_STRIPE */sk_test_51OgYb1GL3gYQY1hZDp1omCdXOyZlCpwMune57tHpXClYf6bYYCgXod6fis9dTOSzBqqDD9MqmGA1bZh5kGL9CXxf00OfwTLt23);
 
 const checkOut = async (info) => {
 
