@@ -13,6 +13,7 @@ const postCheckOutHandler = async (req, res) => {
     }
 console.log("checkOutModels:  ", checkOutModels)
     try {
+        console.log("RESPONSE:  ", "hola)
         const response = await checkOut(checkOutInfo);
         console.log("RESPONSE:  ", response)
         const modelResponse = await modelsCheckOut(checkOutModels);
