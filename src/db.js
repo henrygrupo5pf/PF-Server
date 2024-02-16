@@ -15,17 +15,20 @@ const {
 // });
 
 /*Servidor*/
-const sequelize = new Sequelize(`${DB_URL}`, {
-  logging: false, 
-  native: false, 
-  dialect: 'postgres', // o el dialecto de tu base de datos (puede ser 'postgres' para PostgreSQL, 'mssql' para Microsoft SQL Server, etc.)
+
+
+const sequelize = new Sequelize(process.env.DB_URL, {
+  logging: false,
+  native: false,
+  dialect: 'postgres',
   dialectOptions: {
     ssl: {
       require: true,
-      rejectUnauthorized: false, // O ajusta según tus necesidades de seguridad
+      rejectUnauthorized: false,
     },
   },
 });
+
 
 const basename = path.basename(__filename);
 
