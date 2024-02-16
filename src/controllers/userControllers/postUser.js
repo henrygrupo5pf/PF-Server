@@ -7,7 +7,7 @@ const postUser = async ({ name, email, password, country, location, phoneNumber,
     console.log('Usuario creado en la base de datos:', newUser);
     try {
         await transporter.sendMail({
-            from: process.env.EMAIL_USER,
+            from: "maharba0717@hotmail.com",
             to: email,
             subject: '¡Bienvenido!',
             text: `Hola ${name},\n\nBienvenido a nuestra plataforma. Esperamos que disfrutes de nuestros servicios.\n\nSaludos,\nEl equipo de tu aplicación`,
