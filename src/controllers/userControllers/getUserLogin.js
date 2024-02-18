@@ -17,7 +17,7 @@ const postUserLogin = async (email, password) => {
 
     if (passwordMatch) {
             
-        return dbUser;
+        return {id: dbUser.id, email: dbUser.email, admin: dbUser.admin};
 
     } else {
 
