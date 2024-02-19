@@ -1,15 +1,16 @@
 const postUser = require('../controllers/userControllers/postUser');
 const getUserDetail = require('../controllers/userControllers/getUserDetail');
 const getUserLogin = require('../controllers/userControllers/getUserLogin');
-const getUsers= require("../controllers/userControllers/getUsers");
+const getUsers = require("../controllers/userControllers/getUsers");
+const putUpdateUser = require("../controllers/userControllers/putUpdateUser");
 
-const getUserHandler=async(req, res)=>{
+const getUserHandler = async (req, res) => {
     let { page, pageSize } = req.query;
     try {
         const response = await getUsers(page, pageSize);
         res.status(200).json(response);
     } catch (error) {
-        res.status(500).json({error: error.message});
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -18,52 +19,74 @@ const postUserHandler = async (req, res) => {
     let activeStatus = true;
     let admin = true;
     if (!name || !email || !password || !country || !location || !phoneNumber) {
-        res.status(401).json({error: "Incomplete Data"});
+        res.status(401).json({ error: "Incomplete Data" });
     } else {
         try {
             let response = await postUser({ name, email, password, country, location, phoneNumber, activeStatus, admin });
             res.status(200).json(response);
         } catch (error) {
-            res.status(500).json({error: error.message});
+            res.status(500).json({ error: error.message });
         }
     }
 };
 
-const getUserDetailHandler = async(req, res) => {
-    let {id} = req.params;
+const getUserDetailHandler = async (req, res) => {
+    let { id } = req.params;
     try {
         const response = await getUserDetail(id);
         if (response.error) {
-            res.status(400).json({error: response.error});
+            res.status(400).json({ error: response.error });
         } else {
             res.status(200).json(response);
         }
     } catch (error) {
-        res.status(500).json({error: error.message});
+        res.status(500).json({ error: error.message });
     }
 }
 
 const getUserLoginHandler = async (req, res) => {
-    let {email, password} = req.body;
-  
+    let { email, password } = req.body;
+
     try {
-     
+
         const response = await getUserLogin(email, password);
-        console.log("ACA ESTA LA RESPUESTA DESPUES DE PASARLE LA INFO A LA FUNCION: ", response);
+
         if (response.error) {
-            res.status(400).json({error: response.error});
+            res.status(400).json({ error: response.error });
         } else {
             res.status(200).json(response);
         }
     } catch (error) {
-        res.status(500).json({error: error.message});
+        res.status(500).json({ error: error.message });
     }
 }
+
+const putUserHandler = async(req, res) => {
+    let { id } = req.params;
+    let { name, email, password, country, location, phoneNumber, activeStatus, admin } = req.body;
+    let info = { name, email, password, country, location, phoneNumber, activeStatus, admin };
+   
+    if (!id) {
+        res.status(400).json({ error: "No se puede leer el id" })
+    }
+
+    if (!name, !email, !password, !country, !location, !phoneNumber, !activeStatus, !admin) {
+        res.status(400).json({ error: "Falta informacion" })
+    }
+    try {
+        let modifiedUser = await putUpdateUser(id, info)
+       
+        res.status(200).json({ user: modifiedUser})
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+};
 
 
 module.exports = {
     postUserHandler,
     getUserDetailHandler,
     getUserLoginHandler,
-    getUserHandler
+    getUserHandler,
+    putUserHandler
 }
