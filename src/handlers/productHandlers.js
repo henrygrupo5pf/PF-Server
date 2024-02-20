@@ -78,13 +78,13 @@ const getFilteredAndPaginatedProductsHandler = async (req, res) => {
 };
 
 const putProductHandler = async (req, res) => {
-    let { cost, activeStatus } = req.body;
+    let { cost, activeStatus, name, photo, description, category } = req.body;
     let { id } = req.params;
     if (cost && cost < 0) {
         res.status(401).json({error: "El costo debe ser mayor a 0."})
     } else {
         try {
-            let response = await putProduct({ id, cost, activeStatus });
+            let response = await putProduct({ id, cost, activeStatus, name, photo, description, category });
             if (response.error) {
                 res.status(400).json(response);
             } else {
