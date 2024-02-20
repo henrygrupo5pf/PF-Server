@@ -26,7 +26,7 @@ const postUser = async ({ name, email, password, country, location, phoneNumber,
     //     // throw new Error("Error al enviar el correo electrónico");
     // }
 
-    return {user: {id: user.id, email: user.email, admin: user.admin}, created: true};
+    return {user: {id: user.id, email: user.email, admin: user.admin}, created};
 
 };
 
