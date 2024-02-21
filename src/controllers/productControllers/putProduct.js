@@ -24,10 +24,12 @@ const putProduct = async ({ id, cost, activeStatus, photo, name, description, ca
     if(photo){
         updateFields.photo = photo;
     }
+    console.log(updateFields);
 
     if (Object.keys(updateFields).length === 0) {
         return {error: 'No valid fields to update.'};
     }
+    
 
     const [updatedRowsCount] = await Product.update(updateFields, {
         where: { id: id },
