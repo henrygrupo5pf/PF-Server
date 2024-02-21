@@ -102,9 +102,9 @@ const putProductHandler = async (req, res) => {
     const { cost, activeStatus, name, photo, description, category } = req.body;
 
     // Validación básica para el costo
-    if (cost !== undefined && (typeof cost != 'number' || cost < 0)) {
-        return res.status(401).json({error: "El costo debe ser un número mayor o igual a 0."});
-    }
+    // if (cost !== undefined && (typeof cost != 'number' || cost < 0)) {
+    //     return res.status(401).json({error: "El costo debe ser un número mayor o igual a 0."});
+    // }
 
     try {
         // Asume que putProduct actualiza solo los campos proporcionados y devuelve el producto actualizado
