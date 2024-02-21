@@ -1,12 +1,28 @@
 const { Product } = require('../../db');
 
-const putProduct = async ({ id, cost, activeStatus }) => {
+const putProduct = async ({ id, cost, activeStatus, photo, name, description, category }) => {
     let updateFields = {};
-    if (cost !== undefined && cost >= 0) {
+    if (cost && cost >= 0) {
         updateFields.cost = cost;
     }
-    if (activeStatus !== undefined) {
+    if (activeStatus) {
         updateFields.activeStatus = activeStatus;
+    }
+
+    if(name){
+        updateFields.name = name;
+    }
+
+    if(description){
+        updateFields.description = description;
+    }
+
+    if(category){
+        updateFields.category = category;
+    }
+
+    if(photo){
+        updateFields.photo = photo;
     }
 
     if (Object.keys(updateFields).length === 0) {
