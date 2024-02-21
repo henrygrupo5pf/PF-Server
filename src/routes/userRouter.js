@@ -4,7 +4,8 @@ const {
     postUserHandler,
     getUserDetailHandler,
     postUserLoginHandler,
-    getUserHandler
+    getUserHandler,
+
 } = require('../handlers/userHandlers');
 
 const userRouter = Router();

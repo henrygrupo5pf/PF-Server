@@ -1,6 +1,8 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
+
+
 const fs = require('fs');
 const path = require('path');
 const {
@@ -17,6 +19,17 @@ const {
 /*Servidor*/
 
 
+// const sequelize = new Sequelize(process.env.DB_URL, {
+//   logging: false,
+//   native: false,
+//   dialect: 'postgres',
+//   dialectOptions: {
+//     ssl: {
+//       require: true,
+//       rejectUnauthorized: false,
+//     },
+//   },
+// });
 const sequelize = new Sequelize(process.env.DB_URL, {
   logging: false,
   native: false,
@@ -28,7 +41,6 @@ const sequelize = new Sequelize(process.env.DB_URL, {
     },
   },
 });
-
 
 const basename = path.basename(__filename);
 
