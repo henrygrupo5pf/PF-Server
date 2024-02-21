@@ -27,7 +27,7 @@ try{
             // throw new Error("Error al enviar el correo electrónico");
         }
 
-    return {user: {id: user.id, email: user.email, admin: user.admin}, created:true};
+    return {user: {id: user.id, email: user.email, admin: user.admin}, created};
 
 } catch (error) {
         console.error("Error al crear el usuario:", error.message);
