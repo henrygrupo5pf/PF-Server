@@ -77,24 +77,45 @@ const getFilteredAndPaginatedProductsHandler = async (req, res) => {
     }
 };
 
+// const putProductHandler = async (req, res) => {
+//     let { cost, activeStatus, name, photo, description, category } = req.body;
+//     let { id } = req.params;
+//     if (cost && cost < 0) {
+//         res.status(401).json({error: "El costo debe ser mayor a 0."})
+//     } else {
+//         try {
+//             let response = await putProduct({ id, cost, activeStatus, name, photo, description, category });
+//             if (response.error) {
+//                 res.status(400).json(response);
+//             } else {
+//                 res.status(200).json(response);
+//             }
+//         } catch (error) {
+//             res.status(500).json({error: error.message});
+//         }
+//     }
+// }
+
 const putProductHandler = async (req, res) => {
-    let { cost, activeStatus, name, photo, description, category } = req.body;
-    let { id } = req.params;
-    if (cost && cost < 0) {
-        res.status(401).json({error: "El costo debe ser mayor a 0."})
-    } else {
-        try {
-            let response = await putProduct({ id, cost, activeStatus, name, photo, description, category });
-            if (response.error) {
-                res.status(400).json(response);
-            } else {
-                res.status(200).json(response);
-            }
-        } catch (error) {
-            res.status(500).json({error: error.message});
-        }
+    const { id } = req.params;
+    const { cost, activeStatus, name, photo, description, category } = req.body;
+
+    // Validación básica para el costo
+    if (cost !== undefined && (typeof cost != 'number' || cost < 0)) {
+        return res.status(401).json({error: "El costo debe ser un número mayor o igual a 0."});
     }
-}
+
+    try {
+        // Asume que putProduct actualiza solo los campos proporcionados y devuelve el producto actualizado
+        const updatedProduct = await putProduct(id, { cost, activeStatus, name, photo, description, category });
+        res.status(200).json(updatedProduct);
+    } catch (error) {
+        console.error(error); // Para depuración
+        res.status(500).json({error: error.message});//xx
+    }
+};
+
+   
 
 module.exports={
     getProductsHandler,
