@@ -1,6 +1,6 @@
 const { Product } = require('../../db');
 
-const putProduct = async ({ id, cost, activeStatus, photo, name, description, category }) => {
+const putProduct = async ({id, cost, activeStatus, photo, name, description, category }) => {
     let updateFields = {};
     if (cost && cost >= 0) {
         updateFields.cost = cost;
@@ -24,7 +24,6 @@ const putProduct = async ({ id, cost, activeStatus, photo, name, description, ca
     if(photo){
         updateFields.photo = photo;
     }
-    console.log(updateFields);
 
     if (Object.keys(updateFields).length === 0) {
         return {error: 'No valid fields to update.'};
