@@ -96,6 +96,7 @@ const getFilteredAndPaginatedProductsHandler = async (req, res) => {
 //     }
 // }
 
+
 const putProductHandler = async (req, res) => {
     const { id } = req.params;
     const { cost, activeStatus, name, photo, description, category } = req.body;
