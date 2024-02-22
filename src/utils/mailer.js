@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host: "smtp-mail.outlook.com",
+    host: "smtp-relay.brevo.com",
     port: 587,
     secure: false, // STARTTLS
     auth: {
