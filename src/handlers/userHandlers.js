@@ -3,6 +3,7 @@ const getUserDetail = require('../controllers/userControllers/getUserDetail');
 const getUserLogin = require('../controllers/userControllers/getUserLogin');
 const getUsers= require("../controllers/userControllers/getUsers");
 const postUser = require("../controllers/userControllers/postUser")
+const putUser = require("../controllers/userControllers/putUser")
 
 const getUserHandler=async(req, res)=>{
     let { page, pageSize } = req.query;
@@ -45,8 +46,10 @@ const postUserLoginHandler = async (req, res) => {
 
 const postUserHandler = async(req, res) => {
     let activeStatus = true;
-    let admin = true;
-    let {name, email, password, country, location, phoneNumber} = req.body;
+    let {name, email, password, country, location, phoneNumber, admin} = req.body;
+    if (!admin) {
+        admin = false
+    }
     try {
         const response = await postUser({ name, email, password, country, location, phoneNumber, activeStatus, admin });
         if (response.error) {
@@ -59,10 +62,24 @@ const postUserHandler = async(req, res) => {
     }
 }
 
+const putUserHandler = async (req, res) => {
+    const { id } = req.params;
+    const { name, email, password,  country, location, phoneNumber, admin, activeStatus } = req.body;
+
+    try {
+        const updatedUser = await putUser({id, name, email, password,  country, location, phoneNumber, admin, activeStatus });
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        console.error(error); // Para depuración
+        res.status(500).json({error: error.message});//xx
+    }
+};
+
 
 module.exports = {
     postUserHandler,
     getUserDetailHandler,
     postUserLoginHandler,
     getUserHandler,
+    putUserHandler
 }

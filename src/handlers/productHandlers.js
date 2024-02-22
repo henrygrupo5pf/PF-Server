@@ -108,7 +108,7 @@ const putProductHandler = async (req, res) => {
 
     try {
         // Asume que putProduct actualiza solo los campos proporcionados y devuelve el producto actualizado
-        const updatedProduct = await putProduct(id, { cost, activeStatus, name, photo, description, category });
+        const updatedProduct = await putProduct({id, cost, activeStatus, name, photo, description, category });
         res.status(200).json(updatedProduct);
     } catch (error) {
         console.error(error); // Para depuración
