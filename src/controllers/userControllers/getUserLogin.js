@@ -3,7 +3,10 @@ const { User, Product } = require('../../db');
 const postUserLogin = async (email, password) => {
 
     const dbUser = await User.findOne({
-        where: { email: email },
+        where: { 
+            email: email,
+            activeStatus: true
+         },
         include: {
             model: Product,
             attributes: ["name", "id", "photo"]

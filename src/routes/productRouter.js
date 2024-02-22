@@ -9,6 +9,7 @@ const {
     getFilteredAndPaginatedProductsHandler,
     postProductHandler,
     putProductHandler,
+    getActiveProductsHandler
     // No importes toggleProductActiveStatus desde aquí si no está en este archivo
 } = require('../handlers/productHandlers');
 
@@ -17,6 +18,7 @@ const {
 const productRouter = Router();
 
 productRouter.get('/', getProductsHandler);
+productRouter.get('/active', getActiveProductsHandler);
 productRouter.get('/name', getSearchProductHandler);
 productRouter.get('/filter', getFilteredAndPaginatedProductsHandler);
 productRouter.get('/:id', getProductDetailHandler);

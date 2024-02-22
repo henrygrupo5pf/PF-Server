@@ -8,6 +8,7 @@ const filterProducts = async (category, minCost, maxCost) => {
             [Op.gte]: minCost || 0,
             [Op.lte]: maxCost || Number.MAX_SAFE_INTEGER,
         },
+        activeStatus: true // Agregar esta condición para buscar solo productos activos
     };
 
     const cleanedFilterCriteria = Object.fromEntries(

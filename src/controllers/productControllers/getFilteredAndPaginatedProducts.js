@@ -8,6 +8,7 @@ const getFilteredAndPaginatedProducts = async (page = 1, pageSize = 10, category
             [Op.gte]: minCost || 0,
             [Op.lte]: maxCost || Number.MAX_SAFE_INTEGER,
         },
+        activeStatus: true // Agregar esta condición para buscar solo productos activos
     };
 
     if (country) {

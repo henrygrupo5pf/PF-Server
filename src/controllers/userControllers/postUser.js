@@ -4,7 +4,10 @@ const transporter = require('../../utils/mailer');
 const postUser = async ({ name, email, password, country, location, phoneNumber, activeStatus, admin }) => {
   try {
     const [user, created] = await User.findOrCreate({
-      where: { email }, // Criterio de búsqueda
+      where: {
+        email: email,
+        activeStatus: true // Agregar la condición para activeStatus: true
+    },
       defaults: { name, password, country, location, phoneNumber, activeStatus, admin }
     });
 
