@@ -45,8 +45,10 @@ const postUserLoginHandler = async (req, res) => {
 
 const postUserHandler = async(req, res) => {
     let activeStatus = true;
-    let admin = true;
-    let {name, email, password, country, location, phoneNumber} = req.body;
+    let {name, email, password, country, location, phoneNumber, admin} = req.body;
+    if (!admin) {
+        admin = false
+    }
     try {
         const response = await postUser({ name, email, password, country, location, phoneNumber, activeStatus, admin });
         if (response.error) {
