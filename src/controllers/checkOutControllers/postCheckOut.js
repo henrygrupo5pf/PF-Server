@@ -1,26 +1,26 @@
 const Stripe = require("stripe");
 require("dotenv").config();
 const transporter = require('../../utils/mailer');
-const { PRIVATE_KEY_STRIPE } = process.env;
+//const { PRIVATE_KEY_STRIPE } = process.env;
 
 const stripe = new Stripe("sk_test_51OgYb1GL3gYQY1hZDp1omCdXOyZlCpwMune57tHpXClYf6bYYCgXod6fis9dTOSzBqqDD9MqmGA1bZh5kGL9CXxf00OfwTLt23");
-const sendEmail = async (email, subject, message) => {
+const sendEmail = async (recipient, subject, message) => {
   try {
       await transporter.sendMail({
           from: process.env.EMAIL_USER,
-          to: email,
+          to: recipient,
           subject: subject,
           text: message,
       });
-      console.log("Correo electrónico enviado con éxito a", email);
+      console.log("Correo electrónico enviado con éxito a", recipient);
   } catch (error) {
       console.error("Error al enviar el correo electrónico:", error);
   }
 };
 const checkOut = async (info) => {
 
-  const { email, ...rest } = info;
-  const lineItems = rest.map((item) => {
+
+  const lineItems = info.map((item) => {
 
     const startDate = new Date(item.startDate);
     const endDate = new Date(item.endDate);
@@ -53,8 +53,12 @@ const checkOut = async (info) => {
     /* success_url: "http://localhost:5173/checkout/success",
     cancel_url: "http://localhost:5173/checkout/cancel", */
   });
-  await sendEmail(email, "Pago exitoso", "¡Gracias por tu compra!");
+
 console.log("SOY CHECKOUT TERMINANDO:  ", session )
+if (session.payment_status === 'paid') {
+  // Enviar el correo electrónico si el pago fue exitoso
+  await sendEmail(info.recipient, "Pago exitoso", "¡Gracias por tu compra!");
+}
   return session 
 
 };
