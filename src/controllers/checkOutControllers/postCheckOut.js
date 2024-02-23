@@ -1,6 +1,8 @@
 const Stripe = require("stripe");
 require("dotenv").config();
 const transporter = require('../../utils/mailer');
+const express = require('express');
+const router = express.Router();
 //const { PRIVATE_KEY_STRIPE } = process.env;
 
 const stripe = new Stripe("sk_test_51OgYb1GL3gYQY1hZDp1omCdXOyZlCpwMune57tHpXClYf6bYYCgXod6fis9dTOSzBqqDD9MqmGA1bZh5kGL9CXxf00OfwTLt23");
@@ -62,7 +64,16 @@ console.log("SOY CHECKOUT TERMINANDO:  ", session )
   return session 
 
 };
+router.post('/checkout/success', async (req, res) => {
+  const session = req.body;
+  if (session.payment_status === 'paid') {
+    // Obtener la información del usuario y enviar el correo electrónico
+    const info = getUserInfo(session.user_id);
+    await sendEmail(info.email, "Pago exitoso", "¡Gracias por tu compra!");
+  }
 
+  res.sendStatus(200);
+});
 module.exports = {
   checkOut,
 };
