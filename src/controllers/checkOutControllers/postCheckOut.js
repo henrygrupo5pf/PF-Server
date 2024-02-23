@@ -4,15 +4,15 @@ const transporter = require('../../utils/mailer');
 //const { PRIVATE_KEY_STRIPE } = process.env;
 
 const stripe = new Stripe("sk_test_51OgYb1GL3gYQY1hZDp1omCdXOyZlCpwMune57tHpXClYf6bYYCgXod6fis9dTOSzBqqDD9MqmGA1bZh5kGL9CXxf00OfwTLt23");
-const sendEmail = async (recipient, subject, message) => {
+const sendEmail = async (email, subject, message) => {
   try {
       await transporter.sendMail({
           from: process.env.EMAIL_USER,
-          to: recipient,
+          to: email,
           subject: subject,
           text: message,
       });
-      console.log("Correo electrónico enviado con éxito a", recipient);
+      console.log("Correo electrónico enviado con éxito a", email);
   } catch (error) {
       console.error("Error al enviar el correo electrónico:", error);
   }
@@ -57,7 +57,7 @@ const checkOut = async (info) => {
 console.log("SOY CHECKOUT TERMINANDO:  ", session )
 
   // Enviar el correo electrónico si el pago fue exitoso
-  await sendEmail(info.recipient, "Pago exitoso", "¡Gracias por tu compra!");
+  await sendEmail(info.email, "Pago exitoso", "¡Gracias por tu compra!");
 
   return session 
 
