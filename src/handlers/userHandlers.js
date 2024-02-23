@@ -61,26 +61,29 @@ const getUserLoginHandler = async (req, res) => {
     }
 }
 
-const putUserHandler = async(req, res) => {
-    let { id } = req.params;
-    let { name, email, password, country, location, phoneNumber, activeStatus, admin } = req.body;
-    let info = { name, email, password, country, location, phoneNumber, activeStatus, admin };
-   
-    if (!id) {
-        res.status(400).json({ error: "No se puede leer el id" })
-    }
-
-    if (!name, !email, !password, !country, !location, !phoneNumber, !activeStatus, !admin) {
-        res.status(400).json({ error: "Falta informacion" })
-    }
+const putUserHandler = async (req, res) => {
     try {
-        let modifiedUser = await putUpdateUser(id, info)
-       
-        res.status(200).json({ user: modifiedUser})
+        let { id } = req.params;
+        console.log(req.body);
+        let { name, email, password, country, location, phoneNumber, activeStatus, admin } = req.body;
+        let info = { name, email, password, country, location, phoneNumber, activeStatus, admin };
+
+        if (!id) {
+            return res.status(400).json({ error: "No se puede leer el id" });
+        }
+
+        if (!name || !email || !password || !country || !location || !phoneNumber || !activeStatus || !admin) {
+        
+            return res.status(400).json({ error: "Falta información" });
+        }
+
+        let modifiedUser = await putUpdateUser(id, info);
+        return res.status(200).json({ user: modifiedUser });
     } catch (error) {
-        res.status(500).json({ error: error.message })
+        return res.status(500).json({ error: error.message });
     }
 };
+
 
 
 module.exports = {
