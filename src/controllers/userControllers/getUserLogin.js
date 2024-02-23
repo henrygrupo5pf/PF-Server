@@ -5,7 +5,6 @@ const postUserLogin = async (email, password) => {
     const dbUser = await User.findOne({
         where: { 
             email: email,
-            activeStatus: true
          },
         include: {
             model: Product,
@@ -20,7 +19,7 @@ const postUserLogin = async (email, password) => {
 
     if (passwordMatch) {
             
-        return {id: dbUser.id, email: dbUser.email, admin: dbUser.admin};
+        return {id: dbUser.id, email: dbUser.email, admin: dbUser.admin, activeStatus: dbUser.activeStatus};
 
     } else {
 

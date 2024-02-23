@@ -29,7 +29,7 @@ const postUser = async ({ name, email, password, country, location, phoneNumber,
       }
     }
 
-    return { user: { id: user.id, email: user.email, admin: user.admin }, created };
+    return { user: { id: user.id, email: user.email, admin: user.admin, activeStatus: user.activeStatus }, created };
 
   } catch (error) {
     console.error("Error al crear el usuario:", error.message);
