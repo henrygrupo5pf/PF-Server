@@ -55,10 +55,10 @@ const checkOut = async (info) => {
   });
 
 console.log("SOY CHECKOUT TERMINANDO:  ", session )
-if (session.payment_status === 'paid') {
+
   // Enviar el correo electrónico si el pago fue exitoso
   await sendEmail(info.recipient, "Pago exitoso", "¡Gracias por tu compra!");
-}
+
   return session 
 
 };
