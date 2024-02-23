@@ -66,5 +66,3 @@ console.log("SOY CHECKOUT TERMINANDO:  ", session )
 module.exports = {
   checkOut,
 };
-
-
