@@ -57,7 +57,7 @@ const checkOut = async (info) => {
 console.log("SOY CHECKOUT TERMINANDO:  ", session )
 
   // Enviar el correo electrónico si el pago fue exitoso
-  await sendEmail(info.email, "Pago exitoso", "¡Gracias por tu compra!");
+  await sendEmail(info.email, "Pago exitoso");
 
   return session 
 
