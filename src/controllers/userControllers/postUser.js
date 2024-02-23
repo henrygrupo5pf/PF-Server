@@ -17,7 +17,7 @@ const postUser = async ({ name, email, password, country, location, phoneNumber,
     } else if (created) {
       try {
         await transporter.sendMail({
-          from: process.env.EMAIL_USER,
+          from: "maharba0717@hotmail.com",
           to: email,
           subject: '¡Bienvenido!',
           text: `Hola ${name},\n\nBienvenido a nuestra plataforma. Esperamos que disfrutes de nuestros servicios.\n\nSaludos,\nEl equipo de tu aplicación`,
