@@ -1,4 +1,5 @@
 // const postUser = require('../controllers/userControllers/postUser');
+const deleteUser = require('../controllers/userControllers/deleteUser');
 const getUserDetail = require('../controllers/userControllers/getUserDetail');
 const getUserLogin = require('../controllers/userControllers/getUserLogin');
 const getUsers= require("../controllers/userControllers/getUsers");
@@ -75,11 +76,23 @@ const putUserHandler = async (req, res) => {
     }
 };
 
+const deleteUserHandler = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const deletedUser = await deleteUser(id);
+        res.status(200).json(deletedUser);
+    } catch (error) {
+        console.error(error); // Para depuración
+        res.status(500).json({error: error.message});//xx
+    }
+}
+
 
 module.exports = {
     postUserHandler,
     getUserDetailHandler,
     postUserLoginHandler,
     getUserHandler,
-    putUserHandler
+    putUserHandler,
+    deleteUserHandler
 }

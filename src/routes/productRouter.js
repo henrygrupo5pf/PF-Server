@@ -9,7 +9,8 @@ const {
     getFilteredAndPaginatedProductsHandler,
     postProductHandler,
     putProductHandler,
-    getActiveProductsHandler
+    getActiveProductsHandler,
+    deleteProductHandler
     // No importes toggleProductActiveStatus desde aquí si no está en este archivo
 } = require('../handlers/productHandlers');
 
@@ -24,6 +25,7 @@ productRouter.get('/filter', getFilteredAndPaginatedProductsHandler);
 productRouter.get('/:id', getProductDetailHandler);
 productRouter.post('/', postProductHandler); 
 productRouter.put('/:id', putProductHandler);
+productRouter.delete('/:id', deleteProductHandler);
 // productRouter.patch('/:productId/toggle-status', toggleProductActiveStatus);
 
 module.exports = productRouter;

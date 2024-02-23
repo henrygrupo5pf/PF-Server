@@ -5,6 +5,7 @@ const postCreateProduct=require("../controllers/productControllers/postCreatePro
 const getFilteredAndPaginatedProducts=require("../controllers/productControllers/getFilteredAndPaginatedProducts");
 const putProduct = require('../controllers/productControllers/putProduct');
 const getActiveProducts = require('../controllers/productControllers/getActiveProducts');
+const deleteProduct = require("../controllers/productControllers/deleteProduct");
 
 const getProductsHandler= async(req, res)=>{
     let { page, pageSize } = req.query;
@@ -127,6 +128,17 @@ const putProductHandler = async (req, res) => {
     }
 };
 
+const deleteProductHandler = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const deletedProduct = await deleteProduct(id);
+        res.status(200).json(deletedProduct);
+    } catch (error) {
+        console.error(error); // Para depuración
+        res.status(500).json({error: error.message});//xx
+    }
+}
+
    
 
 module.exports={
@@ -137,4 +149,5 @@ module.exports={
     postProductHandler,
     getFilteredAndPaginatedProductsHandler,
     putProductHandler,
+    deleteProductHandler
 };
