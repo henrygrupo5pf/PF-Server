@@ -1,20 +1,18 @@
 const Stripe = require("stripe");
 require("dotenv").config();
 const transporter = require('../../utils/mailer');
-const express = require('express');
-const router = express.Router();
 //const { PRIVATE_KEY_STRIPE } = process.env;
 
 const stripe = new Stripe("sk_test_51OgYb1GL3gYQY1hZDp1omCdXOyZlCpwMune57tHpXClYf6bYYCgXod6fis9dTOSzBqqDD9MqmGA1bZh5kGL9CXxf00OfwTLt23");
-const sendEmail = async (email, subject, message) => {
+const sendEmail = async (recipient, subject, message) => {
   try {
       await transporter.sendMail({
           from: process.env.EMAIL_USER,
-          to: email,
+          to: recipient,
           subject: subject,
           text: message,
       });
-      console.log("Correo electrónico enviado con éxito a", email);
+      console.log("Correo electrónico enviado con éxito a", recipient);
   } catch (error) {
       console.error("Error al enviar el correo electrónico:", error);
   }
@@ -57,23 +55,14 @@ const checkOut = async (info) => {
   });
 
 console.log("SOY CHECKOUT TERMINANDO:  ", session )
-
+if (session.payment_status === 'paid') {
   // Enviar el correo electrónico si el pago fue exitoso
-  await sendEmail(info.email, "Pago exitoso");
-
+  await sendEmail(info.recipient, "Pago exitoso", "¡Gracias por tu compra!");
+}
   return session 
 
 };
-router.post('/checkout/success', async (req, res) => {
-  const session = req.body;
-  if (session.payment_status === 'paid') {
-    // Obtener la información del usuario y enviar el correo electrónico
-    const info = getUserInfo(session.user_id);
-    await sendEmail(info.email, "Pago exitoso", "¡Gracias por tu compra!");
-  }
 
-  res.sendStatus(200);
-});
 module.exports = {
   checkOut,
 };
