@@ -6,7 +6,6 @@ const postUser = async ({ name, email, password, country, location, phoneNumber,
     const [user, created] = await User.findOrCreate({
       where: {
         email: email,
-        activeStatus: true // Agregar la condición para activeStatus: true
     },
       defaults: { name, password, country, location, phoneNumber, activeStatus, admin }
     });
